@@ -13,26 +13,35 @@ const initdb = async () =>
   });
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
-export const putDb = async (content) => {
-  const jateDB = await openDB("jate", 1);
-  const tx = jateDB.transaction("jate", "readwrite");
-  const store = tx.objectStore("jate");
-  const request = store.put({ id: 1, value: content });
-  const result = await request;
-
-  console.log("data saved to the database", result);
+export const putDb = (id, content) => {
+  openDB("jate", 1)
+    .then((jateDB) => {
+      const tx = jateDB.transaction("jate", "readwrite");//tx for transaction, is transmit in rf 8)
+      const store = tx.objectStore("jate");
+      return store.put({ id, value: content });
+    })
+    .then((result) => {
+      console.log("Data saved to the database with ID:", id, result);
+    })
+    .catch((error) => {
+      console.error("Could not save data to the database:", error);
+    });
 };
-
 // TODO: Add logic for a method that gets all the content from the database
-export const getDb = async () => {
-  const jateDB = await openDB("jate", 1);
-  const tx = jateDB.transaction("jate", "readonly");
-  const store = tx.objectStore("jate");
-  const request = store.getAll();
-  const result = await request;
-
-  console.log("data read from database", result);
-    return result.value;
+export const getDb = () => {
+  openDB("jate", 1)
+    .then((jateDB) => {
+      const tx = jateDB.transaction("jate", "readonly");
+      const store = tx.objectStore("jate");
+      return store.getAll();
+    })
+    .then((result) => {
+      console.log("Data read from database", result);
+      return result;  
+    })
+    .catch((error) => {
+      console.error("Could not read data from the database:", error);
+    });
 };
 
 initdb();
