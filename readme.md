@@ -3,7 +3,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
-This is just another editor for text, this application allows for its functionality even when its offline!
+This text editor is a full-featured web application that allows users to edit, save, and retrieve text within a browser.
+It features a robust client-server architecture, utilizes IndexedDB for offline storage, and supports PWA capabilities, including the ability to install the app locally.
 
 ## Table of Contents
 - [Installation](#installation)
